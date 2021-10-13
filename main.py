@@ -9,7 +9,7 @@ teachersNo = dict()
 teachersYes = dict()    
 teachersBoth = set()
 
-def letsgo(code, sluthost, startvar, slutvar):
+def letsgo(code, endhost, startvar, endvar):
     f = open("result.csv", "a") #creates a result.csv-file
     options = Options()
     options.headless = True
@@ -51,20 +51,20 @@ def letsgo(code, sluthost, startvar, slutvar):
     sys.stdout.flush()
     driver.close()
     f.write(str(code) + "\t " + teacher + "\t " + link + "\n")
-    if code == sluthost:
-        letsgo(startvar, sluthost, startvar, slutvar)
-    elif code < slutvar:
+    if code == endhost:
+        letsgo(startvar, endhost, startvar, endvar)
+    elif code < endvar:
         f.close()
-        letsgo (code+1, sluthost, startvar, slutvar)
+        letsgo (code+1, endhost, startvar, endvar)
     else:
         f.close()
         sys.stdout.flush()
         return
 
 code = int(input("Startcode: \n"))
-sluthost =int(input("Last code for the autumn: \n"))
+endhost =int(input("Last code for the autumn: \n"))
 startvar = int(input("First code for the spring: \n"))
-slutvar = int(input("Last code for the spring: \n"))
+endvar = int(input("Last code for the spring: \n"))
 print("Thank you.")
 sys.stdout.flush()
-letsgo(code, sluthost, startvar, slutvar)
+letsgo(code, endhost, startvar, endvar)
